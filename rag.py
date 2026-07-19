@@ -1,6 +1,8 @@
 from uuid import uuid4
 from pathlib import Path
 
+import os
+
 from dotenv import load_dotenv
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -11,6 +13,12 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 load_dotenv()
+
+try:
+    import streamlit as st
+    os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
+except Exception:
+    pass
 
 # Constants
 CHUNK_SIZE = 1000
@@ -26,7 +34,7 @@ def initialize_components():
     global llm, vector_store
 
     if llm is None:
-        llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.9, max_tokens=500)
+        llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.9, max_tokens=500, api_key=os.environ.get("GROQ_API_KEY"))
 
     if vector_store is None:
         ef = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
