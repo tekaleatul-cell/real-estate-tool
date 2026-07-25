@@ -66,6 +66,7 @@ def process_urls(urls):
     text_splitter = RecursiveCharacterTextSplitter(
         separators=["\n\n", "\n", ".", " "],
         chunk_size=CHUNK_SIZE,
+        chunk_overlap=200,
     )
     docs = text_splitter.split_documents(data)
 
@@ -84,7 +85,7 @@ def generate_answer(query):
     if vector_store is None:
         raise RuntimeError("Vector database is not initialized")
 
-    retriever = vector_store.as_retriever()
+    retriever = vector_store.as_retriever(search_kwargs={"k": 6})
     retrieved_docs = retriever.invoke(query)
 
     context = _format_docs(retrieved_docs)
