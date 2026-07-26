@@ -1,6 +1,9 @@
 # 🏙️ **RealEstate Research Tool - RAG - ChatBot**
 
 A user-friendly news research tool designed for effortless information retrieval. Users can input article URLs and ask questions to receive relevant insights from the real-estate domain. (But it's features can be extended to any domain.)
+
+🚀 **Live Demo:** [real-estate-tool-3dxq2ryuzclsdqrqwh2knt.streamlit.app](https://real-estate-tool-3dxq2ryuzclsdqrqwh2knt.streamlit.app/)
+
 ![product screenshot](resources/image.png)
 ### Features
 
